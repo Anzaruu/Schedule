@@ -75,29 +75,6 @@ public class ConnectionToDB {
         }
     }
 
-    public String getData(){
-        if (connection!=null){
-            Statement statement = null;
-            try {
-                statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("Select * from users;");
-                while (resultSet.next()){
-                    return resultSet.getString(3);
-                }
-                return "123";
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return "gerr";
-            } catch (java.sql.SQLException e){
-                e.printStackTrace();
-                return "1111111";
-            }
-        }
-        else {
-            return "hgfj";
-        }
-    }
-
     public String[] getCourse(){
         List<String> list = new ArrayList<>();
         String[] courses = new String[0];

@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText username, password;
     Button btnlogin;
 
-    TextView txtView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +43,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        username = (EditText) findViewById(R.id.username1);
-        password = (EditText) findViewById(R.id.password1);
-        txtView = findViewById(R.id.txtView);
-        btnlogin = (Button) findViewById(R.id.btnsignin1);
+        username = findViewById(R.id.username1);
+        password = findViewById(R.id.password1);
+        btnlogin = findViewById(R.id.btnsignin1);
         ConnectionToDB db = new ConnectionToDB(this);
-        txtView.setText(db.getData());
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
