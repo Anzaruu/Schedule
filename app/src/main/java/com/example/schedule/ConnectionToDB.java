@@ -203,7 +203,7 @@ public class ConnectionToDB {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            Boolean result = statement.execute("delete from schedule (course_id, teacher_id, schedule_room, schedule_para, schedule_day) values " + "(" +(course_id)+ "," +(teacher_id)+","+room+","+para+",'"+day+"')");
+            Boolean result = statement.execute("delete from schedule where " + "(course_id=" +(course_id)+ "and teacher_id=" +(teacher_id)+"and schedule_room="+room+"and schedule_para="+para +"and schedule_day='"+day+"')");
             return true;
         }catch (Exception e) {
             e.printStackTrace();

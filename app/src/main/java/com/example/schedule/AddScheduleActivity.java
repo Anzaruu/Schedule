@@ -3,6 +3,7 @@ package com.example.schedule;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,29 +43,64 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         ConnectionToDB db = new ConnectionToDB(this);
         courseSpinner = findViewById(R.id.courseSpinner);
-        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, db.getCourse());
-        // Определяем разметку для использования при выборе элемента
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Применяем адаптер к элементу spinner
         courseSpinner.setAdapter(adapter2);
 
 
+
+
         teacherSpinner = findViewById(R.id.teacherSpinner);
-        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
         ArrayAdapter<String> adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, db.getTeacher());
-        // Определяем разметку для использования при выборе элемента
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Применяем адаптер к элементу spinner
         teacherSpinner.setAdapter(adapter3);
 
         daySpinner = findViewById(R.id.daySpinner);
-        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
         ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, days);
-        // Определяем разметку для использования при выборе элемента
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Применяем адаптер к элементу spinner
         daySpinner.setAdapter(adapter1);
+
+
+        final int[] countCourse = new int[1];
+        final int[] countTeacher = new int[1];
+        final String[] day = new String[1];
+        AdapterView.OnItemSelectedListener itemSelectedteacher = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int teacher_id = position;
+                countTeacher[0] = teacher_id+1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+
+        AdapterView.OnItemSelectedListener itemSelectedCourse = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int course_id = position;
+                countCourse[0] = course_id+1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+
+        AdapterView.OnItemSelectedListener itemSelectedDay = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                day[0] = (String)parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+        teacherSpinner.setOnItemSelectedListener(itemSelectedteacher);
+        courseSpinner.setOnItemSelectedListener(itemSelectedCourse);
+        daySpinner.setOnItemSelectedListener(itemSelectedDay);
 
 
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,17 +119,14 @@ public class AddScheduleActivity extends AppCompatActivity {
             }
         });
         createBtn.setOnClickListener(new View.OnClickListener() {
-            String day = daySpinner.getSelectedItem().toString();
-            int course_id = courseSpinner.getId();
-            int teacher_id =teacherSpinner.getId();
 
             @Override
             public void onClick(View v) {
-                if (day.equals("") || addParaTxt.getText().toString().equals("") || addRoomTxt.getText().toString().equals("") || courseSpinner.isSelected() || teacherSpinner.isSelected()){
+                if (day[0].equals("") || addParaTxt.getText().toString().equals("") || addRoomTxt.getText().toString().equals("") || courseSpinner.isSelected() || teacherSpinner.isSelected()){
                     Toast.makeText(AddScheduleActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if (db.insertDataSchedule(day, Integer.parseInt(addParaTxt.getText().toString()), Integer.parseInt(addRoomTxt.getText().toString()), course_id, teacher_id) == true){
+                    if (db.insertDataSchedule(day[0], Integer.parseInt(addRoomTxt.getText().toString()), Integer.parseInt(addParaTxt.getText().toString()), countCourse[0], countTeacher[0]) == true){
                         Toast.makeText(AddScheduleActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     }
                     else{
