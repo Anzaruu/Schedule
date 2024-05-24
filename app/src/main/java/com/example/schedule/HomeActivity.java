@@ -73,7 +73,6 @@ public class HomeActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         ConnectionToDB db = new ConnectionToDB(this);
-        scheduleModelArrayList = db.getArrayList(spinner.getSelectedItem().toString());
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -83,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Ваш выбор: " + item, Toast.LENGTH_SHORT);
                 toast.show();
+                scheduleModelArrayList = db.getArrayList(spinner.getSelectedItem().toString());
 
                 if (scheduleModelArrayList != null){
                     gridBaseAdapter = new GridBaseAdapter(getApplicationContext(),scheduleModelArrayList);
@@ -95,6 +95,21 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        AdapterView.OnItemClickListener itemSelectedListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ScheduleModel scheduleModel = scheduleModelArrayList.get(position);
+                Intent intent = new Intent(HomeActivity.this, InsertOrDeleteActivity.class);
+                intent.putExtra("course_id", scheduleModel.getCourse_id());
+                intent.putExtra("teacher_id", scheduleModel.getTeacher_id());
+                intent.putExtra("schedule_para", scheduleModel.getPara());
+                intent.putExtra("schedule_room", scheduleModel.getRoom());
+                intent.putExtra("day", spinner.getSelectedItem().toString());
+                startActivity(intent);
+            }
+        };
+        gridView1.setOnItemClickListener(itemSelectedListener);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

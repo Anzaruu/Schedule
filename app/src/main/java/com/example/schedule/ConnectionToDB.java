@@ -60,22 +60,15 @@ public class ConnectionToDB {
             Statement statement = null;
             try {
                 statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("Select * from users;");
-                while (resultSet.next()){
-                    String user = resultSet.getString(2);
-                    String passw = resultSet.getString(3);
-                    if (user == username && passw == password){
-                        return true;
-                    }
-                    else{
-                        continue;
-                    }
+                ResultSet resultSet = statement.executeQuery("Select * from users where users_username = '"+username+"' and users_passw='"+password+"'");
+                if (resultSet.next()==true){
+                    return true;
                 }
             } catch (SQLException | java.sql.SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-            return true;
+            return false;
         }
         else {
             return false;
@@ -187,7 +180,7 @@ public class ConnectionToDB {
         String course = null;
         try {
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("Select * from schedule;");
+            ResultSet resultSet = statement.executeQuery("Select * from schedule where schedule_day='"+day+"'");
             if (resultSet != null) {
                 scheduleList = new ArrayList<ScheduleModel>();
                 while (resultSet.next()){
@@ -202,14 +195,12 @@ public class ConnectionToDB {
                             course = courses[i];
                         }
                     }
-                    //if (resultSet.getString(6) == day){
-                        scheduleModel.setRoom(resultSet.getInt(4));
-                        scheduleModel.setPara(resultSet.getInt(5));
-                        scheduleModel.setCourse_id(course);
-                        scheduleModel.setTeacher_id(teacher);
-                        scheduleModel.setDay(resultSet.getString(6));
-                        scheduleList.add(scheduleModel);
-                    //}
+                    scheduleModel.setRoom(resultSet.getInt(4));
+                    scheduleModel.setPara(resultSet.getInt(5));
+                    scheduleModel.setCourse_id(course);
+                    scheduleModel.setTeacher_id(teacher);
+                    scheduleModel.setDay(resultSet.getString(6));
+                    scheduleList.add(scheduleModel);
                 }
             }
         } catch (Exception e) {
@@ -224,6 +215,18 @@ public class ConnectionToDB {
         try {
             statement = connection.createStatement();
             Boolean result = statement.execute("insert into schedule (course_id, teacher_id, schedule_room, schedule_para, schedule_day) values " + "(" +(course_id)+ "," +(teacher_id)+","+room+","+para+",'"+day+"')");
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Boolean deleteDataSchedule(String day, int room, int para, int course_id, int teacher_id){
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            Boolean result = statement.execute("delete from schedule (course_id, teacher_id, schedule_room, schedule_para, schedule_day) values " + "(" +(course_id)+ "," +(teacher_id)+","+room+","+para+",'"+day+"')");
             return true;
         }catch (Exception e) {
             e.printStackTrace();
