@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InsertOrDeleteActivity">
+    tools:context=".InsertOrDeleteActivity"
+    android:background="@color/anti_flash"
+    android:padding="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:text="Удалить пару"
+            android:textColor="@color/green_700"
             android:textAlignment="center"
             android:textSize="30dp" />
 
@@ -29,6 +32,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/txtView"
             android:layout_marginTop="20dp"
+            android:background="@drawable/spinner_style"
             android:hint="День недели" />
 
         <EditText
@@ -56,13 +60,15 @@
             android:layout_below="@+id/addRoomTxt"
             android:layout_marginTop="20dp"
             android:text="Предмет"
+            android:textColor="@color/green_700"
             android:textSize="25dp" />
 
         <Spinner
             android:id="@+id/courseSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/txtViewCourse" />
+            android:layout_below="@+id/txtViewCourse"
+            android:background="@drawable/spinner_style" />
 
         <TextView
             android:id="@+id/txtViewTeacher"
@@ -71,13 +77,15 @@
             android:layout_below="@+id/courseSpinner"
             android:layout_marginTop="20dp"
             android:text="Преподаватель"
+            android:textColor="@color/green_700"
             android:textSize="25dp" />
 
         <Spinner
             android:id="@+id/teacherSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/txtViewTeacher" />
+            android:layout_below="@+id/txtViewTeacher"
+            android:background="@drawable/spinner_style" />
 
 
         <Button
@@ -86,8 +94,11 @@
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
             android:layout_toStartOf="@+id/deleteBtn"
+            android:background="@drawable/btn_style"
             android:text="Вернуться"
+            android:textColor="@color/green_500"
             android:textSize="25dp" />
 
         <Button
@@ -97,7 +108,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:text="Удалить"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:padding="10dp"
+            android:textColor="@color/green_500"
+            android:background="@drawable/btn_style" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddScheduleActivity">
+    tools:context=".AddScheduleActivity"
+    android:background="@color/anti_flash"
+    android:padding="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:text="Создать пару"
+            android:textColor="@color/green_700"
             android:textAlignment="center"
             android:textSize="30dp" />
 
@@ -29,6 +32,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/txtView"
             android:layout_marginTop="20dp"
+            android:background="@drawable/spinner_style"
             android:hint="День недели" />
 
         <EditText
@@ -56,12 +60,14 @@
             android:layout_below="@+id/addRoomTxt"
             android:layout_marginTop="20dp"
             android:text="Предмет"
+            android:textColor="@color/green_700"
             android:textSize="25dp" />
 
         <Spinner
             android:id="@+id/courseSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/spinner_style"
             android:layout_below="@+id/txtViewCourse" />
 
         <Button
@@ -69,6 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="25dp"
+            android:textColor="@color/green_500"
+            android:background="@drawable/btn_style"
             android:layout_below="@+id/courseSpinner"
             android:text="Добавить предмет"/>
 
@@ -78,6 +86,7 @@
             android:layout_height="35dp"
             android:layout_below="@+id/addCourseBtn"
             android:layout_marginTop="20dp"
+            android:textColor="@color/green_700"
             android:text="Преподаватель"
             android:textSize="25dp" />
 
@@ -85,6 +94,7 @@
             android:id="@+id/teacherSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/spinner_style"
             android:layout_below="@+id/txtViewTeacher" />
 
         <Button
@@ -93,6 +103,8 @@
             android:layout_height="50dp"
             android:layout_below="@+id/teacherSpinner"
             android:textSize="25dp"
+            android:textColor="@color/green_500"
+            android:background="@drawable/btn_style"
             android:text="Добавить преподавателя"/>
 
         <Button
@@ -101,6 +113,8 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:textSize="25dp"
+            android:textColor="@color/green_500"
+            android:background="@drawable/btn_style"
             android:text="Создать"/>
     </RelativeLayout>
 
