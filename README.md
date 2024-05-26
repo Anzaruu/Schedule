@@ -1,5 +1,6 @@
 # Schedule
 __Schedule__ - индивидуалный учебный проект. Это андроид приложение для составления расписания учебных занятий. [Макет](https://www.figma.com/design/p3ATFnkvlRddAWCJtu6MLS/Schedule?node-id=0-1&t=UJMCPiC62Ijc4kq8-0)
+[Ссылка на APK-файл](https://drive.google.com/drive/folders/1VlfjR0fHYZaJqqZZxn6uBTSU_Nnjecs6?usp=sharing)
 
 ## Технологии
 * Java
